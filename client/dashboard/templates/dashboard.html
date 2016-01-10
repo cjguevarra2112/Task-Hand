@@ -1,3 +1,9 @@
 <template name="dashboard">
 	<h1>Dashboard</h1>
+
+	<ul class="list-group">
+		<li class="list-group-item"><strong>First name: </strong> {{ profile.fname }}</li>
+		<li class="list-group-item"><strong>Last name: </strong> {{ profile.lname }}</li>
+		<li class="list-group-item"><strong>Email: </strong> {{ emails.[0].address }}</li>
+	</ul>
 </template>

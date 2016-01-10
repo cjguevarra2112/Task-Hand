@@ -1,14 +1,31 @@
-<template name="main-template">
-	<header class="page-header text-center">
-		<h1> Task@Hand</h1>
-	</header>
+<template name="main">
+	{{>header}}
 
 	<div class="container">
+		{{#if currentUser}}
+		<div class="row">
 
+			<!-- SIDEBAR -->
+			<div class="col-sm-6 col-lg-3">
+				<h3>Sidebar </h3>
+				<ul class="list-group">
+					<li class="list-group-item"><a href="#">Item</a></li>
+					<li class="list-group-item"><a href="#">Item</a></li>
+					<li class="list-group-item"><a href="#">Item</a></li>
+					<li class="list-group-item"><a href="#">Item</a></li>
+					<li class="list-group-item"><a href="#">Item</a></li>
+				</ul>
+			</div>
+
+			<!-- CONTENT -->
+			<div class="col-sm-12 col-lg-9">
+				{{>yield}}
+			</div>
+		</div>
+		{{else}}
+			{{>yield}}
+		{{/if}}
 	</div>
 
-
-	<footer class="navbar navbar-default text-center">
-		<p class="navbar-text"> Task@Hand 2015-2016. </p>
-	</footer>
+	{{>footer}}
 </template>
