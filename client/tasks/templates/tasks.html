@@ -1,11 +1,32 @@
 <template name="tasks">
 	{{>addtask }}
 
+		{{#each task}}
+			{{>taskItem}}
+		{{/each}}
 </template>
 
 <template name="taskItem">
 	<blockquote>
-		<p>{{ name }}</p>
+		<span class="dropdown">
+			<a href="#" class="dropdown-toggle" type="button" id="taskStatusDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				<span class="glyphicon glyphicon-pencil"></span>
+				<span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu" aria-labelledby="taskStatusDropDown">
+				<li class="task-status {{ disabledStatus 'pending' }}"><a href="#">pending</a></li>
+				<li class="task-status {{ disabledStatus 'in progress' }}"><a href="#">in progress</a></li>
+				<li class="task-status {{ disabledStatus 'completed' }}"><a href="#">completed</a></li>
+			</ul>
+		</span>
+
+		<a href="#" class="remove-task"><span class="glyphicon glyphicon-trash"></span></a>
+
+		<input type="text" name="taskName" value="{{ name }}" size="45" class="taskInput">
+
+		<span class="pull-right">
+			 <span class="label {{setStatus}} status"> {{ status }} </span>
+		</span>
 	</blockquote>
 </template>
 

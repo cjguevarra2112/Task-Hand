@@ -76,6 +76,6 @@ Router.route("/list/:_id", {
 	},
 	subscriptions: function() {
 		var currentList = this.params._id;
-		return Meteor.subscribe("lists");
+		return [Meteor.subscribe("lists"), Meteor.subscribe("tasks", this.params._id)];
 	}
 });
