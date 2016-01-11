@@ -1,0 +1,18 @@
+<template name="tasks">
+	{{>addtask }}
+
+</template>
+
+<template name="taskItem">
+	<blockquote>
+		<p>{{ name }}</p>
+	</blockquote>
+</template>
+
+<template name="addtask">
+	<form id="addTask">
+		<div class="form-group">
+			<input type="text" class="form-control" placeholder="New Task" name="newTaskName">
+		</div>
+	</form>
+</template>

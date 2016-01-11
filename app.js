@@ -10,7 +10,10 @@ Router.configure({
 
 Router.route("/", {
 	name: "home",
-	template: "home"
+	template: "home",
+	subscriptions: function() {
+		return Meteor.subscribe("lists");
+	}
 });
 
 Router.route("/login", {
@@ -48,5 +51,31 @@ Router.route("/dashboard", {
 		var currentUserInfo = Meteor.user();
 		console.log(currentUserInfo);
 		return currentUserInfo;
+	},
+	subscriptions: function() {
+		return Meteor.subscribe("lists");
+	}
+});
+
+Router.route("/list/:_id", {
+	name: "listPage",
+	template: "listPage",
+	data: function() {
+		var currentUser = Meteor.userId();
+		var currentList = this.params._id;
+		return Lists.findOne({_id: currentList, createdBy: currentUser});
+	},
+	onBeforeAction: function() {
+		var currentUser = Meteor.userId();
+
+		if (currentUser) {
+			this.next();
+		} else {
+			this.render("login");
+		}
+	},
+	subscriptions: function() {
+		var currentList = this.params._id;
+		return Meteor.subscribe("lists");
 	}
 });

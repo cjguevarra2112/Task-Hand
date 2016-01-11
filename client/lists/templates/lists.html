@@ -1,3 +1,16 @@
 <template name="lists">
-	<h1>Lists</h1>
+	<ul class="list-group">
+		{{#each list}}
+			{{>listItem}}
+		{{/each}}
+	</ul>
+</template>
+
+<template name="listItem">
+	<a href="{{pathFor route='listPage'}}" class="list-group-item">{{ name }}</a>
+</template>
+
+<template name="listPage">
+	<h1>Tasks for {{ name }}</h1>
+	{{>tasks}}
 </template>
