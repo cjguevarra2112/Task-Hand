@@ -3,3 +3,5 @@ Template.lists.helpers({
 		return Lists.find();
 	}
 });
+
+

@@ -30,7 +30,8 @@ Meteor.methods({
 			'name': listName,
 			'createdBy': currentUser,
 			'collaborators': [currentUser],
-			'createdOn': new Date()
+			'createdOn': new Date(),
+			'tasksCount': 0
 		};
 
 		return Lists.insert(newList);
@@ -62,6 +63,8 @@ Meteor.methods({
 			createdAt: new Date(),
 			listId: listId
 		};
+
+		Lists.update({_id: listId}, {$inc: {tasksCount: 1}});
 
 		return Tasks.insert(newTask);
 	},
@@ -98,6 +101,10 @@ Meteor.methods({
 		if (Tasks.find({_id: taskId}).count() === 0) {
 			throw new Meteor.Error("task-not-found", "Task not found.");
 		}
+
+		var task = Tasks.findOne(taskId);
+
+		Lists.update({_id: task.listId}, {$inc: {tasksCount: -1}});
 
 		Tasks.remove({_id: taskId});
 	},
